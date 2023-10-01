@@ -1,5 +1,4 @@
-- name: Install Apache 2.4 Php 7.2 
-  hosts: localhost 
+- name: Install Apache 2.4 Php 7.2
   gather_facts: false 
   become: true 
   tasks:
