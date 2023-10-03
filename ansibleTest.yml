@@ -3,18 +3,18 @@
   gather_facts: false 
   become: true 
   tasks:
-    - name: update yum
-      command: yum update -y
+    - name: update apt
+      command: apt update -y
       retries: 5
     - name: install module php
-      command: yum install php -y
+      command: apt install php -y
       async: 20
       poll: 5  
       register: phpInstall
       until: phpInstall.finished
       retries: 5
     - name: install module apache
-      command: yum install httpd -y  
+      command: apt install httpd -y  
       async: 30
       poll: 10
       register: apacheInstall
