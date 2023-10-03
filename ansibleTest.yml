@@ -1,8 +1,22 @@
 - name: Install Apache 2.4 Php 7.2
+  hosts: all
   gather_facts: false 
   become: true 
   tasks:
-    - name: install module php 7.2
-      command: yum install php72    
+    - name: update yum
+      command: yum update -y
+      retries: 5
+    - name: install module php
+      command: yum install php -y
+      async: 20
+      poll: 5  
+      register: phpInstall
+      until: phpInstall.finished
+      retries: 5
     - name: install module apache
-      command: yum install httpd    
+      command: yum install httpd -y  
+      async: 30
+      poll: 10
+      register: apacheInstall
+      until: apacheInstall.finished
+      retries: 5
